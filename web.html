@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Homeostasis y Sistemas de Órganos del Cuerpo Humano – Interactivo y Educativo</title>
+  <!-- Google Fonts para tipografía moderna y amigable -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <!-- Iconos y emojis: se usan SVG y Unicode -->
+  <style>
+    :root {
+      --color-primario: #4f8cff;
+      --color-secundario: #ffb347;
+      --color-fondo: #f6f9fc;
+      --color-texto: #222;
+      --color-acierto: #4caf50;
+      --color-error: #e53935;
+      --color-card: #fff;
+      --color-nav: #e3eafc;
+      --color-boton: #4f8cff;
+      --color-boton-hover: #3561b7;
+      --color-boton-sec: #ffb347;
+      --color-boton-sec-hover: #e89c1d;
+      --sombra: 0 2px 8px rgba(79, 140, 255, 0.08);
+      --radio: 1.2rem;
+      --transicion: 0.2s;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      margin: 0;
+      font-family: 'Roboto', Arial, sans-serif;
+      background: var(--color-fondo);
+      color: var(--color-texto);
+      line-height: 1.7;
+    }
+    header {
+      background: linear-gradient(90deg, var(--color-primario) 60%, var(--color-secundario) 100%);
+      color: #fff;
+      padding: 2rem 1rem 1.2rem 1rem;
+      text-align: center;
+      box-shadow: var(--sombra);
+    }
+    header h1 {
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-size: 2.4rem;
+      margin-bottom: 0.5rem;
+      letter-spacing: 1px;
+    }
+    header p {
+      font-size: 1.2rem;
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+    }
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.7rem;
+      background: var(--color-nav);
+      padding: 0.7rem 0;
+      box-shadow: var(--sombra);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    nav button {
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-size: 1rem;
+      background: var(--color-boton);
+      color: #fff;
+      border: none;
+      border-radius: var(--radio);
+      padding: 0.6rem 1.2rem;
+      cursor: pointer;
+      transition: background var(--transicion);
+      box-shadow: 0 1px 3px rgba(79, 140, 255, 0.07);
+      display: flex;
+      align-items: center;
+      gap: 0.4em;
+    }
+    nav button:hover, nav button.active {
+      background: var(--color-boton-hover);
+    }
+    main {
+      max-width: 950px;
+      margin: 2rem auto;
+      background: var(--color-card);
+      border-radius: var(--radio);
+      box-shadow: var(--sombra);
+      padding: 2rem 1.5rem;
+    }
+    section {
+      margin-bottom: 2.5rem;
+      display: none;
+      animation: fadeIn 0.5s;
+    }
+    section.active {
+      display: block;
+    }
+    h2 {
+      font-family: 'Montserrat', Arial, sans-serif;
+      color: var(--color-primario);
+      font-size: 2rem;
+      margin-top: 0;
+      margin-bottom: 0.7rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+    }
+    h3 {
+      color: var(--color-secundario);
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+      margin-top: 1.5rem;
+      font-family: 'Montserrat', Arial, sans-serif;
+    }
+    .icono {
+      font-size: 1.5em;
+      vertical-align: middle;
+    }
+    .card {
+      background: #f8fbff;
+      border-radius: var(--radio);
+      box-shadow: 0 1px 4px rgba(79, 140, 255, 0.06);
+      padding: 1.2rem 1rem;
+      margin-bottom: 1.2rem;
+      transition: box-shadow var(--transicion);
+    }
+    .card:hover {
+      box-shadow: 0 4px 16px rgba(79, 140, 255, 0.13);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.2rem 0;
+      background: #f6f9fc;
+      border-radius: var(--radio);
+      overflow: hidden;
+      box-shadow: 0 1px 4px rgba(79, 140, 255, 0.06);
+    }
+    th, td {
+      padding: 0.7em 0.6em;
+      text-align: left;
+      border-bottom: 1px solid #e3eafc;
+    }
+    th {
+      background: var(--color-primario);
+      color: #fff;
+      font-weight: 600;
+    }
+    tr:last-child td {
+      border-bottom: none;
+    }
+    .comparacion-retro {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .comparacion-retro .card {
+      flex: 1 1 320px;
+      min-width: 260px;
+    }
+    .ejemplo {
+      background: #e3eafc;
+      border-left: 5px solid var(--color-primario);
+      padding: 0.7em 1em;
+      margin: 0.7em 0 1.2em 0;
+      border-radius: 0.5em;
+      font-size: 1.05em;
+    }
+    .sistemas-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 1.2rem;
+      margin-bottom: 1.5rem;
+    }
+    .sistema-card {
+      background: #f6f9fc;
+      border-radius: var(--radio);
+      box-shadow: 0 1px 4px rgba(255, 179, 71, 0.09);
+      padding: 1.1rem 1rem;
+      margin-bottom: 0.7rem;
+      border-left: 5px solid var(--color-secundario);
+      transition: box-shadow var(--transicion);
+    }
+    .sistema-card:hover {
+      box-shadow: 0 4px 16px rgba(255, 179, 71, 0.16);
+    }
+    .sistema-card h4 {
+      margin-top: 0;
+      margin-bottom: 0.4em;
+      color: var(--color-secundario);
+      font-size: 1.1em;
+      font-family: 'Montserrat', Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      gap: 0.4em;
+    }
+    .sistema-card ul {
+      margin: 0.3em 0 0.7em 1.1em;
+      padding: 0;
+      font-size: 0.98em;
+    }
+    .sistema-card .ejemplo {
+      background: #fffbe7;
+      border-left: 4px solid var(--color-secundario);
+      font-size: 0.97em;
+    }
+    /* Quiz Styles */
+    #quiz-container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: #f8fbff;
+      border-radius: var(--radio);
+      box-shadow: 0 1px 6px rgba(79, 140, 255, 0.09);
+      padding: 2rem 1.5rem;
+      text-align: center;
+    }
+    #quiz-question {
+      font-size: 1.2rem;
+      margin-bottom: 1.2rem;
+      font-weight: 500;
+    }
+    .quiz-options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      margin-bottom: 1.2rem;
+    }
+    .quiz-option {
+      background: #fff;
+      border: 2px solid #e3eafc;
+      border-radius: 0.7em;
+      padding: 0.7em 1em;
+      cursor: pointer;
+      font-size: 1.05em;
+      transition: background var(--transicion), border var(--transicion);
+      text-align: left;
+      outline: none;
+    }
+    .quiz-option.selected {
+      border: 2px solid var(--color-primario);
+      background: #e3eafc;
+    }
+    .quiz-option.correct {
+      background: var(--color-acierto);
+      color: #fff;
+      border: 2px solid var(--color-acierto);
+    }
+    .quiz-option.incorrect {
+      background: var(--color-error);
+      color: #fff;
+      border: 2px solid var(--color-error);
+    }
+    #quiz-feedback {
+      font-weight: 600;
+      font-size: 1.1em;
+      margin-bottom: 1.2em;
+      min-height: 1.2em;
+    }
+    #quiz-next-btn, #quiz-restart-btn {
+      background: var(--color-boton-sec);
+      color: #fff;
+      border: none;
+      border-radius: 0.7em;
+      padding: 0.6em 1.3em;
+      font-size: 1.05em;
+      cursor: pointer;
+      margin-top: 0.7em;
+      transition: background var(--transicion);
+    }
+    #quiz-next-btn:hover, #quiz-restart-btn:hover {
+      background: var(--color-boton-sec-hover);
+    }
+    #quiz-score {
+      font-size: 1.3em;
+      font-weight: 700;
+      margin-bottom: 0.7em;
+      color: var(--color-primario);
+    }
+    #quiz-mensaje-final {
+      font-size: 1.1em;
+      margin-bottom: 1.2em;
+      color: var(--color-secundario);
+    }
+    /* Responsive */
+    @media (max-width: 700px) {
+      main {
+        padding: 1.2rem 0.5rem;
+      }
+      .sistemas-grid {
+        grid-template-columns: 1fr;
+      }
+      #quiz-container {
+        padding: 1.2rem 0.5rem;
+      }
+    }
+    @media (max-width: 500px) {
+      header h1 {
+        font-size: 1.3rem;
+      }
+      h2 {
+        font-size: 1.2rem;
+      }
+      nav button {
+        font-size: 0.98rem;
+        padding: 0.5rem 0.7rem;
+      }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    /* Accesibilidad: foco visible */
+    button:focus, .quiz-option:focus {
+      outline: 2px solid var(--color-primario);
+      outline-offset: 2px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🔬 Homeostasis y Sistemas de Órganos del Cuerpo Humano</h1>
+    <p> Bio. Pagina hecha por Pablo Hernandez :D <span aria-label="estudiante">👩‍🎓</span></p>
+  </header>
+  <nav aria-label="Navegación principal">
+    <button class="nav-btn active" data-section="homeostasis"><span class="icono">⚖️</span>Homeostasis</button>
+    <button class="nav-btn" data-section="salud"><span class="icono">💚</span>Salud</button>
+    <button class="nav-btn" data-section="retroalimentacion"><span class="icono">🔁</span>Retroalimentación</button>
+    <button class="nav-btn" data-section="sistemas"><span class="icono">🦴</span>Sistemas de Órganos</button>
+    <button class="nav-btn" data-section="quiz"><span class="icono">📝</span>Quiz</button>
+  </nav>
+  <main>
+    <!-- Sección 1: Homeostasis -->
+    <section id="homeostasis" class="active" aria-labelledby="h2-homeostasis">
+      <h2 id="h2-homeostasis"><span class="icono">⚖️</span>¿Qué es la Homeostasis?</h2>
+      <div class="card">
+        <strong>Definición:</strong> La <b>homeostasis</b> es la capacidad de los seres vivos para mantener un estado interno relativamente constante, compensando los cambios del entorno mediante mecanismos de autorregulación y retroalimentación.
+      </div>
+      <p>
+        El término <b>homeostasis</b> proviene del griego <i>hómoios</i> (similar) y <i>stásis</i> (estado), y fue acuñado por el fisiólogo Walter Cannon en 1932. Describe cómo los organismos, a pesar de estar formados por materiales inestables y estar en constante intercambio con el ambiente, logran mantener condiciones internas óptimas para la vida.
+      </p>
+      <div class="card">
+        <strong>Homeostasis como sistema termodinámico abierto:</strong>
+        <ul>
+          <li>El cuerpo humano es un <b>sistema abierto</b>: intercambia energía (calor, alimentos) y materia (oxígeno, agua, desechos) con el entorno.</li>
+          <li>La homeostasis no es un estado fijo, sino un <b>equilibrio dinámico</b> que se ajusta constantemente.</li>
+        </ul>
+      </div>
+      <p>
+        Como sistema abierto, el cuerpo humano recibe energía (alimentos, oxígeno) y la utiliza para mantener sus funciones vitales, liberando calor y desechos. La homeostasis implica que, aunque el entorno cambie (temperatura, dieta, estrés), el organismo activa mecanismos para mantener variables como la temperatura, el pH, la glucosa y el volumen de agua dentro de rangos saludables.
+      </p>
+      <div class="card">
+        <strong>Autorregulación y retroalimentación:</strong>
+        <ul>
+          <li>La homeostasis depende de <b>mecanismos de autorregulación</b> que detectan cambios y ajustan la respuesta del cuerpo.</li>
+          <li>Estos mecanismos funcionan principalmente mediante <b>retroalimentación negativa</b>, aunque en algunos casos interviene la <b>retroalimentación positiva</b>.</li>
+        </ul>
+      </div>
+      <p>
+        Por ejemplo, si la temperatura corporal aumenta, el cuerpo responde sudando para enfriarse; si baja, genera escalofríos para producir calor. Estos ajustes automáticos son posibles gracias a sensores (receptores), centros de control (como el cerebro) y efectores (músculos, glándulas) que trabajan en conjunto para restaurar el equilibrio.
+      </p>
+      <div class="ejemplo">
+        <b>Ejemplo cotidiano:</b> Un termostato en una casa funciona como la homeostasis: detecta la temperatura y enciende o apaga la calefacción para mantener el ambiente estable.
+      </div>
+      <p>
+        En resumen, la homeostasis es esencial para la vida porque permite que los organismos sobrevivan y funcionen adecuadamente, adaptándose a los desafíos del entorno y manteniendo la estabilidad interna.
+      </p>
+    </section>
+    <!-- Sección 2: Salud -->
+    <section id="salud" aria-labelledby="h2-salud">
+      <h2 id="h2-salud"><span class="icono">💚</span>¿Qué es la Salud? Equilibrio Dinámico e Interacción de Sistemas</h2>
+      <div class="card">
+        <strong>Definición de salud:</strong>
+        <ul>
+          <li>La <b>salud</b> es un estado de completo bienestar físico, mental y social, y no solo la ausencia de enfermedad (OMS, 1946).</li>
+          <li>Implica un <b>equilibrio dinámico</b> entre el organismo y su ambiente, permitiendo el desarrollo pleno de las capacidades humanas.</li>
+        </ul>
+      </div>
+      <p>
+        Según la Organización Mundial de la Salud, la salud abarca aspectos físicos, mentales, sociales, afectivos, nutricionales y culturales. No basta con no estar enfermo: es necesario que todas las funciones del cuerpo y la mente estén en equilibrio y que la persona pueda adaptarse a los cambios del entorno.
+      </p>
+      <div class="card">
+        <strong>Equilibrio dinámico:</strong>
+        <ul>
+          <li>El cuerpo humano está en constante cambio, pero la salud se mantiene cuando los sistemas pueden adaptarse y compensar las variaciones.</li>
+          <li>Este equilibrio es <b>dinámico</b>: las variables fisiológicas (temperatura, presión, glucosa) fluctúan dentro de límites normales gracias a la homeostasis.</li>
+        </ul>
+      </div>
+      <p>
+        Por ejemplo, la temperatura corporal varía a lo largo del día y ante el ejercicio, pero se mantiene dentro de un rango saludable. Si los mecanismos de regulación fallan, aparece la enfermedad. Así, la salud es el resultado de la interacción armónica entre todos los sistemas del cuerpo y su capacidad para responder a los desafíos internos y externos.
+      </p>
+      <div class="card">
+        <strong>Interacción entre sistemas:</strong>
+        <ul>
+          <li>Ningún sistema actúa de forma aislada: el <b>equilibrio</b> depende de la cooperación entre sistemas (nervioso, endocrino, inmunológico, etc.).</li>
+          <li>La alteración de un sistema puede afectar a los demás y comprometer la salud.</li>
+        </ul>
+      </div>
+      <p>
+        Por ejemplo, el estrés afecta al sistema nervioso y endocrino, lo que puede alterar la inmunidad y la digestión. La salud se mantiene cuando todos los sistemas colaboran para adaptarse y mantener la homeostasis.
+      </p>
+    </section>
+    <!-- Sección 3: Retroalimentación -->
+    <section id="retroalimentacion" aria-labelledby="h2-retro">
+      <h2 id="h2-retro"><span class="icono">🔁</span>Retroalimentación Negativa y Positiva</h2>
+      <div class="comparacion-retro">
+        <div class="card">
+          <h3>🔄 Retroalimentación Negativa</h3>
+          <p>
+            Es el mecanismo más común en la homeostasis. <b>Corrige</b> los cambios desviando la variable hacia su valor normal. Si algo sube, la respuesta lo baja, y viceversa.
+          </p>
+          <div class="ejemplo">
+            <b>Ejemplo:</b> Regulación de la temperatura corporal. Si sube, sudamos para enfriar; si baja, tiritamos para calentar.
+          </div>
+        </div>
+        <div class="card">
+          <h3>🔁 Retroalimentación Positiva</h3>
+          <p>
+            <b>Amplifica</b> los cambios en lugar de corregirlos. La respuesta aumenta la desviación, generando un ciclo que se detiene solo cuando se alcanza un objetivo específico.
+          </p>
+          <div class="ejemplo">
+            <b>Ejemplo:</b> Contracciones del parto. La presión del bebé estimula la liberación de oxitocina, que intensifica las contracciones, lo que a su vez libera más oxitocina, hasta el nacimiento.
+          </div>
+        </div>
+      </div>
+      <table>
+        <tr>
+          <th></th>
+          <th>Retroalimentación Negativa</th>
+          <th>Retroalimentación Positiva</th>
+        </tr>
+        <tr>
+          <td>Definición</td>
+          <td>Reduce la diferencia respecto al valor normal (corrige el cambio)</td>
+          <td>Aumenta la diferencia respecto al valor normal (amplifica el cambio)</td>
+        </tr>
+        <tr>
+          <td>Función</td>
+          <td>Mantener la homeostasis y la estabilidad</td>
+          <td>Lograr un objetivo rápido y específico</td>
+        </tr>
+        <tr>
+          <td>Ejemplos</td>
+          <td>Regulación de glucosa, temperatura, presión arterial</td>
+          <td>Parto, coagulación sanguínea, lactancia</td>
+        </tr>
+        <tr>
+          <td>Frecuencia</td>
+          <td>Muy común en el cuerpo</td>
+          <td>Menos frecuente, pero crucial en ciertos procesos</td>
+        </tr>
+      </table>
+      <p>
+        <b>Retroalimentación negativa:</b> Es esencial para la homeostasis. Por ejemplo, si la glucosa en sangre sube tras comer, el páncreas libera insulina para bajarla. Si baja demasiado, libera glucagón para subirla. Así, la concentración se mantiene estable.
+      </p>
+      <p>
+        <b>Retroalimentación positiva:</b> Aunque menos común, es vital en procesos que requieren una respuesta rápida y autoamplificada. En el parto, la presión del bebé sobre el cuello uterino desencadena la liberación de oxitocina, que intensifica las contracciones, lo que a su vez libera más oxitocina, hasta que el bebé nace y el ciclo se detiene.
+      </p>
+      <div class="ejemplo">
+        <b>Visualización:</b> Imagina una pelota en una colina. En la retroalimentación negativa, si la pelota se mueve, el sistema la empuja de vuelta al centro (estabilidad). En la positiva, si la pelota se mueve, el sistema la empuja aún más lejos (amplificación).
+      </div>
+    </section>
+    <!-- Sección 4: Sistemas de Órganos -->
+    <section id="sistemas" aria-labelledby="h2-sistemas">
+      <h2 id="h2-sistemas"><span class="icono">🦴</span>Sistemas de Órganos del Cuerpo Humano</h2>
+      <p>
+        El cuerpo humano está formado por <b>sistemas de órganos</b> que trabajan juntos para mantener la vida y la homeostasis. Cada sistema tiene órganos principales, funciones clave y contribuye de manera específica al equilibrio interno.
+      </p>
+      <div class="sistemas-grid">
+        <!-- Sistema cardiovascular -->
+        <div class="sistema-card">
+          <h4>❤️ Sistema cardiovascular</h4>
+          <ul>
+            <li><b>Órganos principales:</b> Corazón, vasos sanguíneos (arterias, venas, capilares), sangre</li>
+            <li><b>Funciones clave:</b> Transporta oxígeno, nutrientes, hormonas y elimina desechos</li>
+            <li><b>Contribución a la homeostasis:</b> Regula el pH, la temperatura y distribuye sustancias esenciales</li>
+          </ul>
+          <div class="ejemplo">
+            <b>Ejemplo:</b> Si la presión arterial sube, el corazón y los vasos ajustan su actividad para bajarla (retroalimentación negativa).
+          </div>
+        </div>
+        <!-- Sistema respiratorio -->
+        <div class="sistema-card">
+          <h4>🌬️ Sistema respiratorio</h4>
+          <ul>
+            <li><b>Órganos principales:</b> Nariz, faringe, laringe, tráquea, bronquios, pulmones, diafragma</li>
+            <li><b>Funciones clave:</b> Intercambio de oxígeno y dióxido de carbono, regulación del pH sanguíneo</li>
+            <li><b>Contribución a la homeostasis:</b> Mantiene niveles adecuados de gases y pH</li>
+          </ul>
+          <div class="ejemplo">
+            <b>Ejemplo:</b> Si el CO₂ aumenta, respiramos más rápido para eliminarlo y restablecer el equilibrio.
+          </div>
+        </div>
+        <!-- Sistema digestivo -->
+        <div class="sistema-card">
+          <h4>🍽️ Sistema digestivo</h4>
+          <ul>
+            <li><b>Órganos principales:</b> Boca, faringe, esófago, estómago, intestinos, hígado, páncreas, vesícula biliar</li>
+            <li><b>Funciones clave:</b> Digestion y absorción de nutrientes, eliminación de desechos</li>
+            <li><b>Contribución a la homeostasis:</b> Proporciona energía y materiales para el cuerpo</li>
+          </ul>
+          <div class="ejemplo">
+            <b>Ejemplo:</b> Si falta glucosa, el hígado libera reservas para mantener la energía.
+          </div>
+        </div>
+        <!-- Sistema nervioso -->
+        <div class="sistema-card">
+          <h4>🧠 Sistema nervioso</h4>
+          <ul>
+            <li><b>Órganos principales:</b> Cerebro, médula espinal, nervios, órganos sensoriales</li>
+            <li><b>Funciones clave:</b> Controla y coordina funciones corporales, procesa información sensorial</li>
+            <li><b>Contribución a la homeostasis:</b> Detecta cambios y envía señales para ajustar respuestas</li>
+          </ul>
+          <div class="ejemplo">
+            <b>Ejemplo:</b> Si la temperatura baja, el cerebro ordena a los músculos que generen calor (escalofríos).
+          </div>
+        </div>
+        <!-- Sistema endocrino -->
+        <div class="sistema-card">
+          <h4>🦋 Sistema endocrino</h4>
+          <ul>
+            <li><b>Órganos principales:</b> Glándulas endocrinas (hipófisis, tiroides, suprarrenales, páncreas, ovarios, testículos)</li>
+            <li><b>Funciones clave:</b> Produce hormonas que regulan el crecimiento, metabolismo, reproducción</li>
+            <li><b>Contribución a la homeostasis:</b> Ajusta funciones a largo plazo mediante hormonas</li>
+          </ul>
+          <div class="ejemplo">
+            <b>Ejemplo:</b> Si la glucosa sube, el páncreas libera insulina para bajarla.
+          </div>
+        </div>
+        <!-- Sistema urinario -->
+        <div class="sistema-card">
+          <h4>🚽 Sistema urinario (renal)</h4>
+          <ul>
+            <li><b>Órganos principales:</b> Riñones, uréteres, vejiga, uretra</li>
+            <li><b>Funciones clave:</b> Filtra la sangre, elimina desechos y regula el equilibrio de agua y sales</li>
+            <li><b>Contribución a la homeostasis:</b> Mantiene el volumen y composición de los líquidos corporales</li>
+          </ul>
+          <div class="ejemplo">
+            <b>Ejemplo:</b> Si falta agua, los riñones concentran la orina para evitar la deshidratación.
+          </div>
+        </div>
+        <!-- Sistema esquelético -->
+        <div class="sistema-card">
+          <h4>🦴 Sistema esquelético</h4>
+          <ul>
+            <li><b>Órganos principales:</b> Huesos, cartílagos, articulaciones, ligamentos</li>
+            <li><b>Funciones clave:</b> Soporte, protección, movimiento, producción de células sanguíneas, almacenamiento de minerales</li>
+            <li><b>Contribución a la homeostasis:</b> Libera calcio y fósforo según las necesidades del cuerpo</li>
+          </ul>
+          <div class="ejemplo">
+            <b>Ejemplo:</b> Si falta calcio en sangre, los huesos liberan calcio para mantener el equilibrio.
+          </div>
+        </div>
+        <!-- Sistema muscular -->
+        <div class="sistema-card">
+          <h4>💪 Sistema muscular</h4>
+          <ul>
+            <li><b>Órganos principales:</b> Músculos esqueléticos, cardíaco y liso</li>
+            <li><b>Funciones clave:</b> Movimiento, postura, producción de calor, funciones internas (digestión, circulación)</li>
+            <li><b>Contribución a la homeostasis:</b> Genera calor y permite respuestas rápidas a cambios</li>
+          </ul>
+          <div class="ejemplo">
+            <b>Ejemplo:</b> Los escalofríos generan calor cuando la temperatura baja.
+          </div>
+        </div>
+        <!-- Sistema tegumentario -->
+        <div class="sistema-card">
+          <h4>🧑‍🦲 Sistema tegumentario (piel)</h4>
+          <ul>
+            <li><b>Órganos principales:</b> Piel, cabello, uñas, glándulas sudoríparas y sebáceas</li>
+            <li><b>Funciones clave:</b> Protección, regulación de la temperatura, percepción sensorial, síntesis de vitamina D</li>
+            <li><b>Contribución a la homeostasis:</b> Evita la pérdida de agua, regula el calor y protege de infecciones</li>
+          </ul>
+          <div class="ejemplo">
+            <b>Ejemplo:</b> Sudar enfría el cuerpo cuando hace calor.
+          </div>
+        </div>
+        <!-- Sistema linfático e inmune -->
+        <div class="sistema-card">
+          <h4>🦠 Sistema linfático e inmune</h4>
+          <ul>
+            <li><b>Órganos principales:</b> Vasos linfáticos, ganglios linfáticos, bazo, timo, amígdalas, linfa</li>
+            <li><b>Funciones clave:</b> Defiende contra infecciones, regula el equilibrio de líquidos</li>
+            <li><b>Contribución a la homeostasis:</b> Elimina patógenos y mantiene el volumen de líquidos</li>
+          </ul>
+          <div class="ejemplo">
+            <b>Ejemplo:</b> Si entra una bacteria, los linfocitos la atacan para evitar enfermedades.
+          </div>
+        </div>
+        <!-- Sistema reproductor -->
+        <div class="sistema-card">
+          <h4>👶 Sistema reproductor</h4>
+          <ul>
+            <li><b>Órganos principales:</b> Ovarios, trompas de Falopio, útero, vagina (femenino); testículos, conductos deferentes, próstata, pene (masculino)</li>
+            <li><b>Funciones clave:</b> Producción de gametos, hormonas sexuales, reproducción</li>
+            <li><b>Contribución a la homeostasis:</b> Mantiene la especie y regula hormonas que influyen en otros sistemas</li>
+          </ul>
+          <div class="ejemplo">
+            <b>Ejemplo:</b> Durante el embarazo, el cuerpo ajusta muchas funciones para proteger al feto.
+          </div>
+        </div>
+        <!-- Sistemas sensoriales -->
+        <div class="sistema-card">
+          <h4>👁️ Sistemas sensoriales</h4>
+          <ul>
+            <li><b>Órganos principales:</b> Ojos, oídos, nariz, lengua, piel, órganos del equilibrio</li>
+            <li><b>Funciones clave:</b> Detectan estímulos (luz, sonido, sabor, olor, tacto, equilibrio)</li>
+            <li><b>Contribución a la homeostasis:</b> Permiten percibir cambios y activar respuestas adecuadas</li>
+          </ul>
+          <div class="ejemplo">
+            <b>Ejemplo:</b> Si tocamos algo caliente, retiramos la mano para evitar daño.
+          </div>
+        </div>
+      </div>
+      <p>
+        <b>Resumen:</b> Todos los sistemas están interconectados y colaboran para mantener la homeostasis. Si uno falla, puede afectar a los demás y poner en riesgo la salud.
+      </p>
+    </section>
+    <!-- Sección 5: Quiz -->
+    <section id="quiz" aria-labelledby="h2-quiz">
+      <h2 id="h2-quiz"><span class="icono">📝</span>Quiz Interactivo: ¡Pon a prueba tus conocimientos!</h2>
+      <div id="quiz-container" role="region" aria-live="polite">
+        <div id="quiz-question"></div>
+        <div class="quiz-options" id="quiz-options"></div>
+        <div id="quiz-feedback"></div>
+        <button id="quiz-next-btn" style="display:none;">Siguiente</button>
+        <div id="quiz-score" style="display:none;"></div>
+        <div id="quiz-mensaje-final" style="display:none;"></div>
+        <button id="quiz-restart-btn" style="display:none;">Reintentar Quiz</button>
+      </div>
+    </section>
+  </main>
+  <footer style="text-align:center; color:#888; font-size:0.98em; padding:1.5em 0 0.7em 0;">
+    <span>© 2026 Pablo Hernandez | Recurso educativo abierto para estudiantes de secundaria | BIOLOGIA</span>
+    <span>----- Contacto | pablo1959697988@gmail.com</span>
+
+    <br>
+  </footer>
+  <!-- JavaScript para navegación y quiz -->
+  <script>
+    // Navegación entre secciones
+    const navBtns = document.querySelectorAll('.nav-btn');
+    const sections = document.querySelectorAll('section');
+    navBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        navBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const target = btn.getAttribute('data-section');
+        sections.forEach(sec => {
+          if (sec.id === target) {
+            sec.classList.add('active');
+            sec.setAttribute('tabindex', '-1');
+            sec.focus();
+          } else {
+            sec.classList.remove('active');
+            sec.removeAttribute('tabindex');
+          }
+        });
+        window.scrollTo({top: 0, behavior: 'smooth'});
+      });
+    });
+
+    // Quiz interactivo
+    const quizData = [
+      {
+        question: "¿Qué es la homeostasis?",
+        options: [
+          "La capacidad de mantener un estado interno estable mediante autorregulación",
+          "El proceso de digestión de los alimentos",
+          "La reproducción de las células",
+          "El movimiento de los músculos"
+        ],
+        correct: 0
+      },
+      {
+        question: "¿Cuál es el principal mecanismo que mantiene la homeostasis?",
+        options: [
+          "Retroalimentación positiva",
+          "Retroalimentación negativa",
+          "Fotosíntesis",
+          "Evaporación"
+        ],
+        correct: 1
+      },
+      {
+        question: "¿Qué función cumple el sistema urinario en la homeostasis?",
+        options: [
+          "Produce hormonas sexuales",
+          "Filtra la sangre y regula el equilibrio de agua y sales",
+          "Controla los movimientos voluntarios",
+          "Permite la percepción de sonidos"
+        ],
+        correct: 1
+      },
+      {
+        question: "¿Cuál de los siguientes es un ejemplo de retroalimentación positiva?",
+        options: [
+          "Regulación de la glucosa en sangre",
+          "Contracciones del parto por oxitocina",
+          "Control de la presión arterial",
+          "Regulación de la temperatura corporal"
+        ],
+        correct: 1
+      },
+      {
+        question: "¿Qué sistema transporta oxígeno y nutrientes a las células?",
+        options: [
+          "Sistema digestivo",
+          "Sistema nervioso",
+          "Sistema cardiovascular",
+          "Sistema tegumentario"
+        ],
+        correct: 2
+      },
+      {
+        question: "¿Qué variable regula principalmente el sistema respiratorio?",
+        options: [
+          "El calcio en los huesos",
+          "El pH y los gases en sangre",
+          "La producción de orina",
+          "La síntesis de vitamina D"
+        ],
+        correct: 1
+      },
+      {
+        question: "¿Cuál es la función principal del sistema endocrino?",
+        options: [
+          "Producir hormonas que regulan funciones corporales",
+          "Filtrar desechos de la sangre",
+          "Proteger contra infecciones",
+          "Permitir el movimiento voluntario"
+        ],
+        correct: 0
+      },
+      {
+        question: "¿Qué caracteriza a la salud según la OMS?",
+        options: [
+          "Ausencia de enfermedad únicamente",
+          "Bienestar físico, mental y social",
+          "Solo equilibrio físico",
+          "Capacidad de correr rápido"
+        ],
+        correct: 1
+      },
+      {
+        question: "¿Qué sistema detecta los cambios del entorno y coordina respuestas rápidas?",
+        options: [
+          "Sistema digestivo",
+          "Sistema nervioso",
+          "Sistema esquelético",
+          "Sistema linfático"
+        ],
+        correct: 1
+      },
+      {
+        question: "¿Cuál es la función principal del sistema tegumentario (piel)?",
+        options: [
+          "Regular la presión arterial",
+          "Proteger el cuerpo y regular la temperatura",
+          "Producir glóbulos rojos",
+          "Controlar la respiración"
+        ],
+        correct: 1
+      }
+    ];
+
+    let quizIndex = 0;
+    let quizScore = 0;
+    let quizAnswered = false;
+
+    const quizQuestion = document.getElementById('quiz-question');
+    const quizOptions = document.getElementById('quiz-options');
+    const quizFeedback = document.getElementById('quiz-feedback');
+    const quizNextBtn = document.getElementById('quiz-next-btn');
+    const quizScoreDiv = document.getElementById('quiz-score');
+    const quizMensajeFinal = document.getElementById('quiz-mensaje-final');
+    const quizRestartBtn = document.getElementById('quiz-restart-btn');
+
+    function mostrarPregunta() {
+      quizAnswered = false;
+      quizFeedback.textContent = '';
+      quizNextBtn.style.display = 'none';
+      quizScoreDiv.style.display = 'none';
+      quizMensajeFinal.style.display = 'none';
+      quizRestartBtn.style.display = 'none';
+      quizOptions.innerHTML = '';
+      const q = quizData[quizIndex];
+      quizQuestion.textContent = `Pregunta ${quizIndex + 1} de ${quizData.length}: ${q.question}`;
+      q.options.forEach((opt, i) => {
+        const btn = document.createElement('button');
+        btn.className = 'quiz-option';
+        btn.setAttribute('tabindex', '0');
+        btn.textContent = opt;
+        btn.addEventListener('click', () => seleccionarOpcion(i, btn));
+        btn.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            seleccionarOpcion(i, btn);
+          }
+        });
+        quizOptions.appendChild(btn);
+      });
+    }
+
+    function seleccionarOpcion(i, btn) {
+      if (quizAnswered) return;
+      quizAnswered = true;
+      const q = quizData[quizIndex];
+      const optionsBtns = quizOptions.querySelectorAll('.quiz-option');
+      optionsBtns.forEach((b, idx) => {
+        b.disabled = true;
+        if (idx === q.correct) b.classList.add('correct');
+        if (idx === i && idx !== q.correct) b.classList.add('incorrect');
+      });
+      if (i === q.correct) {
+        quizFeedback.textContent = "¡Correcto! 🎉";
+        quizFeedback.style.color = "var(--color-acierto)";
+        quizScore++;
+      } else {
+        quizFeedback.textContent = `Incorrecto. La respuesta correcta es: "${q.options[q.correct]}".`;
+        quizFeedback.style.color = "var(--color-error)";
+      }
+      quizNextBtn.style.display = 'inline-block';
+      quizNextBtn.focus();
+    }
+
+    quizNextBtn.addEventListener('click', () => {
+      quizIndex++;
+      if (quizIndex < quizData.length) {
+        mostrarPregunta();
+      } else {
+        mostrarResultado();
+      }
+    });
+
+    function mostrarResultado() {
+      quizQuestion.textContent = "¡Quiz finalizado!";
+      quizOptions.innerHTML = '';
+      quizFeedback.textContent = '';
+      quizScoreDiv.textContent = `Puntaje: ${quizScore} / ${quizData.length}`;
+      quizScoreDiv.style.display = 'block';
+      let mensaje = '';
+      if (quizScore === quizData.length) {
+        mensaje = "¡Excelente! 🌟 Eres un/a experto/a en homeostasis y sistemas de órganos.";
+      } else if (quizScore >= quizData.length * 0.7) {
+        mensaje = "¡Muy bien! 💪 Sigue repasando para convertirte en un/a experto/a.";
+      } else if (quizScore >= quizData.length * 0.4) {
+        mensaje = "¡Buen intento! 📚 Repasa las secciones y vuelve a intentarlo.";
+      } else {
+        mensaje = "¡No te desanimes! 🚀 La práctica te hará dominar estos temas.";
+      }
+      quizMensajeFinal.textContent = mensaje;
+      quizMensajeFinal.style.display = 'block';
+      quizRestartBtn.style.display = 'inline-block';
+      // Guardar puntaje en localStorage
+      try {
+        localStorage.setItem('quizHomeostasisScore', quizScore);
+      } catch (e) {}
+      quizRestartBtn.focus();
+    }
+
+    quizRestartBtn.addEventListener('click', () => {
+      quizIndex = 0;
+      quizScore = 0;
+      mostrarPregunta();
+    });
+
+    // Iniciar quiz al cargar sección
+    function iniciarQuizSiActivo() {
+      const quizSection = document.getElementById('quiz');
+      if (quizSection.classList.contains('active')) {
+        quizIndex = 0;
+        quizScore = 0;
+        mostrarPregunta();
+      }
+    }
+    // Lanzar quiz al cambiar a la sección
+    navBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        if (btn.getAttribute('data-section') === 'quiz') {
+          iniciarQuizSiActivo();
+        }
+      });
+    });
+    // Lanzar quiz al cargar
+    window.addEventListener('DOMContentLoaded', () => {
+      if (document.getElementById('quiz').classList.contains('active')) {
+        iniciarQuizSiActivo();
+      }
+    });
+
+    // Accesibilidad: permitir navegación con teclado en quiz
+    quizOptions.addEventListener('keydown', (e) => {
+      const options = Array.from(quizOptions.querySelectorAll('.quiz-option'));
+      const idx = options.findIndex(opt => opt === document.activeElement);
+      if (e.key === 'ArrowDown' && idx < options.length - 1) {
+        options[idx + 1].focus();
+        e.preventDefault();
+      } else if (e.key === 'ArrowUp' && idx > 0) {
+        options[idx - 1].focus();
+        e.preventDefault();
+      }
+    });
+  </script>
+  <!-- Comentarios de código para docentes y desarrolladores:
+    - El HTML utiliza etiquetas semánticas (<header>, <nav>, <main>, <section>, <footer>) para accesibilidad y estructura clara.
+    - El CSS emplea variables, diseño responsive y colores amigables para estudiantes.
+    - El JavaScript implementa la navegación entre secciones y un quiz interactivo con retroalimentación inmediata y almacenamiento de puntaje.
+    - Los iconos y emojis mejoran la visualización y el engagement.
+    - El contenido está alineado con el currículo de secundaria de Uruguay y las recomendaciones de recursos educativos digitales.
+    - El quiz es autocontenible y no requiere conexión a servidores externos.
+    - El archivo es compatible con lectores de pantalla y navegación por teclado.
+    - Licencia: CC BY-SA. Se recomienda atribuir y compartir igual.
+  -->
+</body>
+</html>
